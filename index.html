@@ -1,0 +1,966 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="color-scheme" content="light" />
+    <!-- Search indexing remains disabled while the preprint release is pending. -->
+    <meta name="robots" content="noindex, nofollow" />
+    <title>
+      Fluorescence-enhanced Whisker Array for Underwater Source Localization
+    </title>
+    <meta
+      name="description"
+      content="Five fluorescent whiskers, one camera and about 100 mW of UV light locate an underwater source from the flow it makes, in the dark."
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Fluorescence-enhanced Whisker Array for Underwater Source Localization"
+    />
+    <meta
+      property="og:description"
+      content="Five glowing whiskers, one camera, and a small network locate an underwater source from the flow it makes."
+    />
+    <!-- For link previews, replace with the absolute URL after deployment, e.g. https://<user>.github.io/<repo>/static/images/hero_poster.jpg -->
+    <meta property="og:image" content="https://samxie34.github.io/whisker/static/images/hero_poster.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='88'>🦭</text></svg>"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Castoro:ital@0;1&family=Noto+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href="static/images/hero_poster.jpg"
+      fetchpriority="high"
+    />
+    <link rel="stylesheet" href="project.css" />
+    <link rel="canonical" href="https://samxie34.github.io/whisker/">
+  <meta property="og:url" content="https://samxie34.github.io/whisker/">
+</head>
+  <body>
+    <header class="hero">
+      <div class="hero-inner">
+        <h1>
+          <span>Fluorescence-enhanced Whisker Array</span
+          ><span>with Vision-based Deformation Analysis</span
+          ><span>for Underwater Source Localization</span>
+        </h1>
+      </div>
+      <div class="hero-media">
+        <img
+          class="hero-poster"
+          src="static/images/hero_poster.jpg"
+          alt=""
+          fetchpriority="high"
+        />
+        <video
+          id="hero-video"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="auto"
+          poster="static/images/hero_poster.jpg"
+          aria-hidden="true"
+        >
+          <source src="static/videos/hero_loop.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <div class="hero-foot">
+        <p>Five fluorescent whiskers. One camera.</p>
+        <button class="motion-toggle" type="button" data-video="hero-video">
+          Pause video
+        </button>
+      </div>
+      <div class="hero-meta">
+        <p class="authors">
+          <a href="https://www.linkedin.com/in/xiaochi-xie-a94930396/"
+            >Xiaochi Xie</a
+          ><sup>1†</sup>, <a href="https://hao-l1.github.io/">Hao Li</a
+          ><sup>1†</sup>, Shixuan Zhao<sup>1</sup>, Siyue Yao<sup>1,2*</sup>,
+          <a href="https://shurans.github.io/">Shuran Song</a><sup>1</sup>,
+          <a href="https://profiles.stanford.edu/mark-cutkosky"
+            >Mark R. Cutkosky</a
+          ><sup>1</sup>
+        </p>
+        <p class="affil">
+          <sup>1</sup>Stanford University &nbsp;·&nbsp; <sup>2</sup>Shanghai
+          Jiao Tong University
+        </p>
+        <p class="affil">†Equal contribution &nbsp; *Corresponding author</p>
+        <p class="venue">Submitted to ICRA 2027 · under review</p>
+        <div class="buttons">
+          <a class="btn" href="#demo"
+            ><svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M4 6h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z"
+              />
+              <path d="M18 10l4-2v8l-4-2" />
+            </svg>
+            Watch demo</a
+          >
+          <a class="btn" href="static/papers/whisker_arxiv.pdf" target="_blank" rel="noopener"
+            ><svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 3h8l4 4v14H6zM14 3v5h4M9 12h6M9 16h6" />
+            </svg>
+            Paper PDF</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <nav class="nav" aria-label="Sections">
+      <ul>
+        <li><a href="#idea">Overview</a></li>
+        <li><a href="#demo">Demo</a></li>
+        <li><a href="#whiskers">Sensing system</a></li>
+        <li><a href="#pipeline">Visual tracking</a></li>
+        <li><a href="#results">Results</a></li>
+        <li><a href="#moving">Moving source</a></li>
+        <li><a href="#paper">Paper &amp; authors</a></li>
+        <li><a href="#video">Full video</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <section class="statement" id="idea">
+        <h2>
+          Locating an underwater source<br />
+          from <em>the flow it creates.</em>
+        </h2>
+        <p>
+          Five fluorescent whiskers glow under low-power UV light. A single
+          camera watches them bend, and a lightweight network turns two seconds
+          of deformation into a source position.
+        </p>
+      </section>
+
+      <section
+        class="section demo-intro"
+        id="demo"
+        aria-label="Moving-source demonstration"
+      >
+        <div class="wrap">
+          <figure class="demo">
+            <video
+              id="moving_source_loop"
+              class="demo-video"
+              muted
+              loop
+              playsinline
+              preload="none"
+              poster="static/images/moving_source_loop.jpg"
+              aria-label="Moving source pool experiment with synchronized source position, camera tracking and prediction plots."
+            >
+              <source
+                src="static/videos/moving_source_loop.mp4"
+                type="video/mp4"
+              />
+            </video>
+            <figcaption>
+              A model trained on stationary sources follows a moving thruster.
+              The pool view, tracked whiskers, and predicted source position are
+              shown together. Playback: 20×.
+            </figcaption>
+            <div class="demo-tools">
+              <button
+                type="button"
+                class="motion-toggle"
+                data-video="moving_source_loop"
+              >
+                Play demo
+              </button>
+            </div>
+          </figure>
+          <details class="evidence">
+            <summary>
+              System overview figure
+              <span>Biological inspiration, platform, and localization</span>
+            </summary>
+            <figure class="narrow">
+              <a
+                class="zoom"
+                href="static/images/fig1_overview.jpg"
+                aria-label="Enlarge figure"
+              >
+                <picture>
+                  <source
+                    srcset="static/images/fig1_overview.webp"
+                    type="image/webp"
+                  />
+                  <img
+                    src="static/images/fig1_overview.jpg"
+                    width="2000"
+                    height="2501"
+                    alt="Overview: a seal-whisker-inspired fluorescent whisker array senses the flow from an underwater thruster; predicted positions track a moving source along arc and radial trajectories."
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </picture>
+              </a>
+              <figcaption>
+                Flow disturbances from an underwater source deform the whiskers;
+                the camera sees the deformation and the model recovers the
+                source position. Bottom: real-time localization of a thruster
+                moving along an arc and along a radial path.
+              </figcaption>
+            </figure>
+          </details>
+        </div>
+      </section>
+
+      <section class="section" id="whiskers">
+        <div class="read">
+          <h2 class="section-heading">Reading flow in the dark</h2>
+          <p class="question">
+            How can a camera see a whisker with so little light?
+          </p>
+        </div>
+        <div class="wrap">
+          <figure class="demo">
+            <video
+              id="fluorescence_loop"
+              class="demo-video"
+              muted
+              loop
+              playsinline
+              preload="none"
+              poster="static/images/fluorescence_loop.jpg"
+              aria-label="Fluorescent whiskers become visible as UV illumination is switched on."
+            >
+              <source
+                src="static/videos/fluorescence_loop.mp4"
+                type="video/mp4"
+              />
+            </video>
+            <figcaption>
+              As UV illumination turns on, the fluorescent whiskers become
+              visible in the dark. The inset shows the camera view. Playback:
+              1×.
+            </figcaption>
+            <div class="demo-tools">
+              <button
+                type="button"
+                class="motion-toggle"
+                data-video="fluorescence_loop"
+              >
+                Play demo
+              </button>
+            </div>
+          </figure>
+        </div>
+        <div class="read">
+          <p class="lede">
+            Harbor seals follow hydrodynamic trails with their whiskers. Our
+            artificial whisker borrows the same undulating, tapered shape, which
+            suppresses the self-excited vortex oscillations a plain cylinder
+            would show in flow, so what bends it is the flow from the source.
+          </p>
+          <p>
+            Each whisker is a 0.4&nbsp;mm superelastic nitinol core inside a
+            urethane shell with 5&nbsp;wt% green fluorescent pigment, cast in a
+            two-stage molding process. Without UV, a fluorescent whisker looks
+            like any other. Under UV, it stands out sharply against the dark
+            water, which is what lets the illumination stay at roughly
+            100&nbsp;mW per light.
+          </p>
+        </div>
+        <div class="wrap">
+          <figure>
+            <a
+              class="zoom"
+              href="static/images/fig3_fabrication.jpg"
+              aria-label="Enlarge figure"
+            >
+              <picture>
+                <source
+                  srcset="static/images/fig3_fabrication.webp"
+                  type="image/webp"
+                />
+                <img
+                  src="static/images/fig3_fabrication.jpg"
+                  width="2000"
+                  height="346"
+                  alt="Two-stage molding process for the fluorescent whisker, and a comparison of whiskers with and without fluorescent pigment under UV light."
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
+            </a>
+            <figcaption>
+              Left: two-stage molding with fluorescence added to the urethane
+              overmold. Right: with and without pigment, with and without UV.
+              Only the fluorescent whisker under UV is clearly visible.
+            </figcaption>
+          </figure>
+        </div>
+        <div class="read">
+          <h3>One camera, five orientations</h3>
+          <p>
+            The platform is a 1080p, 60&nbsp;Hz camera, two 365&nbsp;nm UV
+            lights on either side of it, and five whiskers mounted at different
+            pitch and yaw angles. A single view cannot recover the full 3D
+            bending of one whisker, but because the whiskers point in different
+            directions, a deformation that is hard to see on one is pronounced
+            on another.
+          </p>
+        </div>
+        <div class="wrap">
+          <figure class="narrow">
+            <a
+              class="zoom"
+              href="static/images/fig2_system.jpg"
+              aria-label="Enlarge figure"
+            >
+              <picture>
+                <source
+                  srcset="static/images/fig2_system.webp"
+                  type="image/webp"
+                />
+                <img
+                  src="static/images/fig2_system.jpg"
+                  width="2000"
+                  height="1036"
+                  alt="Whisker design with wavy tapered profile and elliptical cross-section, and the sensing platform with camera, two UV lights, and five spatially oriented whiskers."
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
+            </a>
+            <figcaption>
+              Whisker geometry and the compact sensing platform. Top and side
+              views show the different yaw and pitch angles of the five
+              whiskers.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section tint" id="pipeline">
+        <div class="read">
+          <h2 class="section-heading">
+            From whisker motion to source position
+          </h2>
+          <p class="question">What can five bending whiskers tell us?</p>
+        </div>
+        <div class="wrap">
+          <figure class="demo">
+            <video
+              id="tracking_loop"
+              class="demo-video"
+              muted
+              loop
+              playsinline
+              preload="none"
+              poster="static/images/tracking_loop.jpg"
+              aria-label="Fluorescent whiskers with fitted spline centerlines and tracking points."
+            >
+              <source src="static/videos/tracking_loop.mp4" type="video/mp4" />
+            </video>
+            <figcaption>
+              Spline centerlines and tracked points turn fluorescence into a
+              compact motion signal.
+            </figcaption>
+            <div class="demo-tools">
+              <button
+                type="button"
+                class="motion-toggle"
+                data-video="tracking_loop"
+              >
+                Play demo
+              </button>
+            </div>
+          </figure>
+        </div>
+        <div class="read">
+          <p>
+            Each frame is enhanced to isolate the green fluorescence, the five
+            whiskers are segmented, and a point at a fixed arc length along each
+            spline centerline is tracked. Two seconds of these displacements (5
+            whiskers × 2 axes × 50 samples) go into a lightweight CNN that
+            outputs the source position (r,&nbsp;θ).
+          </p>
+        </div>
+        <div class="wrap">
+          <figure>
+            <a
+              class="zoom"
+              href="static/images/fig4_pipeline.jpg"
+              aria-label="Enlarge figure"
+            >
+              <picture>
+                <source
+                  srcset="static/images/fig4_pipeline.webp"
+                  type="image/webp"
+                />
+                <img
+                  src="static/images/fig4_pipeline.jpg"
+                  width="2000"
+                  height="562"
+                  alt="Pipeline: image pre-processing and whisker segmentation, point tracking, CNN regression, and source localization in polar coordinates."
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
+            </a>
+            <figcaption>
+              Pre-processing and tracking (left), CNN regression (middle), and
+              the polar localization frame (right).
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section" id="results">
+        <div class="read">
+          <h2 class="section-heading">Where is the source?</h2>
+          <p class="question">
+            Testing beyond the positions seen during training.
+          </p>
+          <p>
+            A thruster on a three-axis gantry is moved over a fan-shaped region
+            350–950&nbsp;mm from the array and ±30° around its axis, always
+            facing the array at the same power. Training uses 16 grid positions
+            (8,640 two-second samples over two days); the test set adds 108
+            off-grid positions the model has never seen.
+          </p>
+        </div>
+        <div class="wrap">
+          <figure class="narrow">
+            <a
+              class="zoom"
+              href="static/images/fig5_setup.jpg"
+              aria-label="Enlarge figure"
+            >
+              <picture>
+                <source
+                  srcset="static/images/fig5_setup.webp"
+                  type="image/webp"
+                />
+                <img
+                  src="static/images/fig5_setup.jpg"
+                  width="2000"
+                  height="1057"
+                  alt="Experimental setup: thruster on a three-axis gantry over a fan-shaped test region in a pool, with the whisker array at the apex; the actual illumination is nearly dark."
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
+            </a>
+            <figcaption>
+              The pool setup. Panels A and B are brightened for visibility;
+              panel C shows the actual illumination during data collection.
+            </figcaption>
+          </figure>
+        </div>
+        <div class="read">
+          <div
+            class="stats"
+            aria-label="Localization results across all test positions"
+          >
+            <div class="stat">
+              <b>88.1 <small>mm</small></b
+              ><span>Mean spatial error</span>
+            </div>
+            <div class="stat">
+              <b>73.5 <small>mm</small></b
+              ><span>Mean range error</span>
+            </div>
+            <div class="stat">
+              <b>2.48<small>°</small></b
+              ><span>Mean bearing error</span>
+            </div>
+          </div>
+          <p class="result-note">
+            Across 16 on-grid and 108 off-grid test positions.
+          </p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Test points</th>
+                  <th class="num">Δr MAE (mm)</th>
+                  <th class="num">Δθ MAE (°)</th>
+                  <th class="num">Distance MAE (mm)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>16 on-grid</td>
+                  <td class="num">45.2</td>
+                  <td class="num">0.47</td>
+                  <td class="num">47.2</td>
+                </tr>
+                <tr>
+                  <td>108 off-grid</td>
+                  <td class="num">77.7</td>
+                  <td class="num">2.78</td>
+                  <td class="num">94.2</td>
+                </tr>
+                <tr class="total">
+                  <td>All</td>
+                  <td class="num">73.5</td>
+                  <td class="num">2.48</td>
+                  <td class="num">88.1</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Bearing is learned better than range: angular estimates stay tight
+            everywhere, while off-grid range estimates are pulled toward the
+            nearest training radius. The mapping still interpolates, with
+            off-grid predictions clustering around their true locations.
+          </p>
+        </div>
+        <div class="wrap">
+          <details class="evidence">
+            <summary>
+              Explore the localization results
+              <span>Predictions, error distributions, and spatial maps</span>
+            </summary>
+            <figure>
+              <a
+                class="zoom"
+                href="static/images/fig6_results.jpg"
+                aria-label="Enlarge figure"
+              >
+                <picture>
+                  <source
+                    srcset="static/images/fig6_results.webp"
+                    type="image/webp"
+                  />
+                  <img
+                    src="static/images/fig6_results.jpg"
+                    width="2000"
+                    height="2023"
+                    alt="Predicted source locations with error circles, predicted versus actual r and theta with box plots, and spatial maps of radial and angular error."
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </picture>
+              </a>
+              <figcaption>
+                Predicted positions with per-location mean error (A), predicted
+                versus actual r and θ (B), and the spatial distribution of
+                radial and angular error (C).
+              </figcaption>
+            </figure>
+          </details>
+        </div>
+      </section>
+
+      <section class="section tint" id="moving">
+        <div class="read">
+          <h2 class="section-heading">Following different trajectories</h2>
+          <p class="question">Does the estimate follow different paths?</p>
+        </div>
+        <div class="wrap">
+          <figure class="demo">
+            <video
+              id="trajectory_loop"
+              class="demo-video"
+              muted
+              loop
+              playsinline
+              preload="none"
+              poster="static/images/trajectory_loop.jpg"
+              aria-label="Predicted and reference source positions during arc motion at different radii."
+            >
+              <source
+                src="static/videos/trajectory_loop.mp4"
+                type="video/mp4"
+              />
+            </video>
+            <figcaption>
+              Arc-motion trials at three radii, with predicted positions in blue
+              and reference positions shown as open circles. Playback: 20×.
+            </figcaption>
+            <div class="demo-tools">
+              <button
+                type="button"
+                class="motion-toggle"
+                data-video="trajectory_loop"
+              >
+                Play demo
+              </button>
+            </div>
+          </figure>
+        </div>
+        <div class="read">
+          <p>
+            The model is trained only on stationary sources. The arc-motion
+            trials above test it at radii of 350, 450, and 550&nbsp;mm, with the
+            largest errors on off-grid paths.
+          </p>
+          <p>
+            In a separate radial-motion experiment, the thruster moves from 450
+            to 750&nbsp;mm at 1.6&nbsp;mm/s. The estimate follows it with
+            51.7&nbsp;mm range error and 0.63° angular error; six repeated runs
+            show the same trend. The full results below include both radial and
+            arc trajectories.
+          </p>
+        </div>
+        <div class="wrap">
+          <details class="evidence">
+            <summary>
+              Explore the moving-source results
+              <span>Speeds, repeatability, and trajectories</span>
+            </summary>
+            <figure>
+              <a
+                class="zoom"
+                href="static/images/fig7_moving.jpg"
+                aria-label="Enlarge figure"
+              >
+                <picture>
+                  <source
+                    srcset="static/images/fig7_moving.webp"
+                    type="image/webp"
+                  />
+                  <img
+                    src="static/images/fig7_moving.jpg"
+                    width="2000"
+                    height="1621"
+                    alt="Moving-source localization: two speeds, six repeated trials, and radial and arc trajectories with estimated r and theta over time."
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </picture>
+              </a>
+              <figcaption>
+                Two motion speeds (A), six repeated trials (B), and radial and
+                arc trajectories with the estimated r and θ over time (C).
+              </figcaption>
+            </figure>
+          </details>
+        </div>
+        <div class="read">
+          <h3>Limitations and next steps</h3>
+          <p>
+            Localization is planar: the thruster sits at the array's height,
+            faces it, and runs at a fixed power. A first look at source strength
+            shows that a stronger thruster gives a larger and steadier whisker
+            response. Next: flow visualization around the array, a higher frame
+            rate for frequency cues, more source types, and integration on an
+            underwater vehicle.
+          </p>
+        </div>
+        <div class="wrap">
+          <details class="evidence">
+            <summary>
+              How does source strength affect the response?
+              <span>Whisker displacement at two power levels</span>
+            </summary>
+            <figure class="narrow">
+              <a
+                class="zoom"
+                href="static/images/fig8_power.jpg"
+                aria-label="Enlarge figure"
+              >
+                <picture>
+                  <source
+                    srcset="static/images/fig8_power.webp"
+                    type="image/webp"
+                  />
+                  <img
+                    src="static/images/fig8_power.jpg"
+                    width="2000"
+                    height="807"
+                    alt="Whisker displacement time series and mean displacement at 30% and 50% thruster power."
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </picture>
+              </a>
+              <figcaption>
+                Whisker response at two thruster power levels: displacement over
+                time (A) and mean displacement per 2&nbsp;s segment (B).
+              </figcaption>
+            </figure>
+          </details>
+        </div>
+      </section>
+
+      <section class="section" id="paper">
+        <div class="wrap">
+          <h2 class="section-heading">Paper &amp; authors</h2>
+          <p class="author-list">
+            <a href="https://www.linkedin.com/in/xiaochi-xie-a94930396/"
+              >Xiaochi Xie</a
+            ><sup>1†</sup> · <a href="https://hao-l1.github.io/">Hao Li</a
+            ><sup>1†</sup> · Shixuan Zhao<sup>1</sup> · Siyue Yao<sup>1,2*</sup>
+            · <a href="https://shurans.github.io/">Shuran Song</a><sup>1</sup> ·
+            <a href="https://profiles.stanford.edu/mark-cutkosky"
+              >Mark R. Cutkosky</a
+            ><sup>1</sup>
+          </p>
+          <p class="author-notes">
+            <sup>1</sup>Stanford University · <sup>2</sup>Shanghai Jiao Tong
+            University · †Equal contribution · *Corresponding author
+          </p>
+        </div>
+        <div class="read">
+          <p class="release-note">
+            <a class="btn" href="static/papers/whisker_arxiv.pdf" target="_blank" rel="noopener">Read the manuscript PDF ↗</a>
+          </p>
+          <details class="abstract">
+            <summary>Abstract</summary>
+            <p>
+              Deep-water biological observation is essential for understanding
+              marine organisms and their interactions with the environment.
+              However, conventional optical and acoustic approaches can
+              introduce stimuli that alter animal behavior and bias biological
+              observations. This paper proposes a fluorescence-enhanced whisker
+              array sensing system that pinpoints underwater hydrodynamic
+              sources through local optical readout rather than direct source
+              imaging. Five spatially oriented whiskers, fabricated with nitinol
+              cores and fluorescent urethane shells, are integrated with
+              ultraviolet excitation and a monocular camera. Image enhancement
+              and segmentation are applied to track the whisker deformation.
+              Further, a lightweight convolutional neural network captures
+              temporal and cross-whisker features from 2&nbsp;s sequences to
+              estimate source localization. Pool experiments achieve a mean
+              spatial localization error of 88&nbsp;mm, with 73.5&nbsp;mm in
+              radius and 2.5° in angle, across a test region of 600&nbsp;mm with
+              ±30°. Real-time localization of a moving thruster further
+              demonstrates the capability of the proposed method in dynamic
+              scenarios, highlighting its potential for integration into
+              underwater robots for hydrodynamic source detection, localization,
+              and tracking in low-light environments.
+            </p>
+          </details>
+          <p style="margin-top: 16px">
+            Questions about the paper or the whiskers:
+            <a href="mailto:xxie15@stanford.edu">Xiaochi Xie</a>.
+          </p>
+        </div>
+      </section>
+
+      <section class="section tint" id="qa">
+        <div class="read qa">
+          <h2 class="section-heading">Questions &amp; answers</h2>
+          <details>
+            <summary>Why fluorescence instead of a brighter light?</summary>
+            <p>
+              The goal is to observe without disturbing. Fluorescent pigment
+              makes the whisker the brightest thing in the frame under a
+              low-power UV source, so the camera gets clean contrast at about
+              100&nbsp;mW per light. A conventional light bright enough to track
+              a plain whisker would flood the surroundings.
+            </p>
+          </details>
+          <details>
+            <summary>
+              Why one camera instead of a sensor on every whisker?
+            </summary>
+            <p>
+              Per-whisker sensors need wiring, calibration and synchronization,
+              and the system grows with every whisker added. A shared camera
+              reads all five at once, and the whiskers point in different
+              directions on purpose, so the single view captures deformation
+              that any one whisker would hide.
+            </p>
+          </details>
+          <details>
+            <summary>Why is bearing easier to estimate than range?</summary>
+            <p>
+              Changing the source angle changes which whiskers bend and how,
+              which the model picks up easily. Changing range mostly scales the
+              same pattern, a weaker cue, so off-grid ranges drift toward the
+              nearest training radius.
+            </p>
+          </details>
+          <details>
+            <summary>Does it work while the source is moving?</summary>
+            <p>
+              Yes, within limits. The model sees only stationary sources during
+              training, yet it follows radial and arc trajectories in real time
+              using 2&nbsp;s windows. Faster motion increases the error, so
+              continuous tracking will benefit from training data collected
+              along trajectories.
+            </p>
+          </details>
+          <details>
+            <summary>What are the main limitations?</summary>
+            <p>
+              The experiments are planar, with a single source type at fixed
+              power, facing the array. Height, heading and strength are not yet
+              estimated, and the pool boundary introduces a mild left–right
+              asymmetry in error.
+            </p>
+          </details>
+        </div>
+      </section>
+      <section class="section tint" id="video">
+        <div class="wrap">
+          <h2 class="section-heading">Full technical video</h2>
+          <p class="question">
+            The complete walkthrough, from sensing hardware to localization
+            experiments.
+          </p>
+          <div class="video-frame">
+            <video
+              id="main-video"
+              controls
+              playsinline
+              preload="none"
+              poster="static/images/moving_source_loop.jpg"
+            >
+              <source
+                src="static/videos/whisker_icra_video.mp4"
+                type="video/mp4"
+              />
+              Your browser does not support embedded video.
+              <a href="static/videos/whisker_icra_video.mp4"
+                >Download the video</a
+              >.
+            </video>
+          </div>
+          <div class="chips" aria-label="Jump to a chapter">
+            <button type="button" class="chip" data-t="5">
+              <span>0:05</span> System
+            </button>
+            <button type="button" class="chip" data-t="10">
+              <span>0:10</span> Fluorescence under UV
+            </button>
+            <button type="button" class="chip" data-t="28">
+              <span>0:28</span> Whisker tracking
+            </button>
+            <button type="button" class="chip" data-t="31">
+              <span>0:31</span> Moving source
+            </button>
+            <button type="button" class="chip" data-t="44">
+              <span>0:44</span> Repeatability
+            </button>
+            <button type="button" class="chip" data-t="55">
+              <span>0:55</span> Different angles
+            </button>
+            <button type="button" class="chip" data-t="65">
+              <span>1:05</span> Different radii
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      Last updated October 2026 · Figures from the submitted manuscript (under
+      review).<br />
+      Page design inspired by
+      <a href="https://bdml.stanford.edu/pages/FBG_Whisker_share/"
+        >FBG Whisker</a
+      >
+      and <a href="https://umi-under-water.github.io/">UMI-Underwater</a>.
+    </footer>
+
+    <div
+      class="lightbox"
+      id="lightbox"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Enlarged figure"
+    >
+      <button type="button" aria-label="Close">×</button>
+      <img alt="" />
+    </div>
+
+    <script>
+      (function () {
+        // Video chapters.
+        var mv = document.getElementById("main-video");
+        document.querySelectorAll(".chip[data-t]").forEach(function (b) {
+          b.addEventListener("click", function () {
+            if (!mv) return;
+            mv.scrollIntoView({ behavior: "instant", block: "center" });
+            var t = parseFloat(b.getAttribute("data-t"));
+            var go = function () {
+              mv.currentTime = t;
+              var p = mv.play();
+              if (p && p.catch) p.catch(function () {});
+            };
+            if (mv.readyState >= 1) go();
+            else {
+              mv.preload = "auto";
+              mv.addEventListener("loadedmetadata", go, { once: true });
+              mv.load();
+            }
+          });
+        });
+
+        // Figure lightbox (links still open the image when JS is off).
+        var lb = document.getElementById("lightbox"),
+          lbImg = lb.querySelector("img");
+        var lastZoom = null;
+        function closeLb() {
+          if (!lb.classList.contains("open")) return;
+          lb.classList.remove("open");
+          lbImg.removeAttribute("src");
+          document.body.style.overflow = "";
+          if (lastZoom) lastZoom.focus();
+        }
+        document.querySelectorAll("a.zoom").forEach(function (a) {
+          a.addEventListener("click", function (e) {
+            e.preventDefault();
+            lastZoom = a;
+            document.body.style.overflow = "hidden";
+            var img = a.querySelector("img");
+            lbImg.src = a.getAttribute("href");
+            lbImg.alt = img ? img.alt : "";
+            lb.classList.add("open");
+            lb.querySelector("button").focus();
+          });
+        });
+        lb.addEventListener("click", closeLb);
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape") closeLb();
+          if (e.key === "Tab" && lb.classList.contains("open")) {
+            e.preventDefault();
+            lb.querySelector("button").focus();
+          }
+        });
+
+        // Highlight the current section in the nav.
+        var links = Array.prototype.slice.call(
+          document.querySelectorAll(".nav a"),
+        );
+        var byId = {};
+        links.forEach(function (l) {
+          byId[l.getAttribute("href").slice(1)] = l;
+        });
+        if ("IntersectionObserver" in window) {
+          var io = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (en) {
+                if (en.isIntersecting && byId[en.target.id]) {
+                  links.forEach(function (l) {
+                    l.classList.remove("active");
+                  });
+                  byId[en.target.id].classList.add("active");
+                }
+              });
+            },
+            { rootMargin: "-45% 0px -50% 0px" },
+          );
+          Object.keys(byId).forEach(function (id) {
+            var s = document.getElementById(id);
+            if (s) io.observe(s);
+          });
+        }
+
+      })();
+    </script>
+    <script src="project.js"></script>
+  </body>
+</html>
