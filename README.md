@@ -1,6 +1,6 @@
 # Fluorescence-enhanced Whisker Array with Vision-based Deformation Analysis for Underwater Source Localization
 
-Project website: https://samxie34.github.io/whisker/
+Project website: https://fluorescent-whisker.github.io/
 
 Static HTML, CSS, JavaScript, and project media. Published with GitHub Pages from the `main` branch root; no build command is required.
 
