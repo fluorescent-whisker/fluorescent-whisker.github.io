@@ -1,4 +1,22 @@
 (() => {
+  const copyCitation = document.getElementById("copy-citation");
+  const citation = document.getElementById("citation-bibtex");
+  const citationStatus = document.getElementById("citation-status");
+  if (copyCitation && citation && citationStatus) {
+    copyCitation.addEventListener("click", async () => {
+      citationStatus.textContent = "";
+      try {
+        if (!navigator.clipboard || !navigator.clipboard.writeText) {
+          throw new Error("Clipboard is unavailable");
+        }
+        await navigator.clipboard.writeText(citation.textContent.trim() + "\n");
+        citationStatus.textContent = "BibTeX copied to clipboard.";
+      } catch {
+        citationStatus.textContent =
+          "Could not copy automatically. Select the BibTeX above and copy it manually, or download the .bib file.";
+      }
+    });
+  }
   const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
   const videos = [...document.querySelectorAll("#hero-video, .demo-video")];
   const summary = document.getElementById("main-video");

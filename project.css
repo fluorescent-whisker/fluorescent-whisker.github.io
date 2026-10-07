@@ -519,6 +519,49 @@ tr.total {
   text-align: center;
   margin: 26px 0;
 }
+.citation {
+  min-width: 0;
+}
+.citation-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+  margin: 0 0 14px;
+  font-size: 13px;
+}
+.citation-tools button {
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  background: #fff;
+  color: var(--ink);
+  padding: 6px 14px;
+  font-size: 12px;
+  cursor: pointer;
+}
+.citation-tools button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.citation pre {
+  max-width: 100%;
+  margin: 0;
+  padding: 20px;
+  background: var(--paper-2);
+  color: #444;
+  font: 12px/1.75 var(--mono);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.citation code {
+  font: inherit;
+}
+.citation-status {
+  min-height: 1.75em;
+  margin: 10px 0 14px;
+  color: var(--muted);
+  font-size: 12px;
+}
 .qa details {
   border-top: 1px solid var(--rule);
   padding: 7px 0;
