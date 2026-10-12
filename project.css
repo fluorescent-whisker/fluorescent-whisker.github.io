@@ -123,8 +123,10 @@ figcaption {
   position: absolute;
   inset: 0;
   pointer-events: none;
+  /* The left UV light spreads further than the right one; a longer left
+     fade gives both sides the same black margin. */
   background:
-    linear-gradient(90deg, #000, transparent 6%, transparent 94%, #000),
+    linear-gradient(90deg, #000 3.0%, rgb(0 0 0 / 0.90) 5.8%, rgb(0 0 0 / 0.65) 8.6%, rgb(0 0 0 / 0.35) 11.4%, rgb(0 0 0 / 0.10) 14.2%, transparent 17.0%, transparent 94%, #000),
     linear-gradient(180deg, #000, transparent 14%, transparent 86%, #000);
 }
 .hero-inner {
@@ -656,6 +658,11 @@ footer {
   }
   .hero-media {
     aspect-ratio: 1.6;
+  }
+  .hero-media:after {
+    background:
+      linear-gradient(90deg, #000 0.0%, rgb(0 0 0 / 0.90) 2.2%, rgb(0 0 0 / 0.65) 4.4%, rgb(0 0 0 / 0.35) 6.6%, rgb(0 0 0 / 0.10) 8.8%, transparent 11.0%, transparent 94%, #000),
+      linear-gradient(180deg, #000, transparent 14%, transparent 86%, #000);
   }
   .hero-inner {
     padding: 42px 26px 0;
