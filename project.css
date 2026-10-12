@@ -92,9 +92,19 @@ figcaption {
   align-items: center;
   padding-bottom: 36px;
 }
+.hero {
+  /* The cover grows with the window: title, video and caption row fill the
+     first screen, never narrower than the published 1040px, at most 1720px. */
+  --cover-width: clamp(
+    min(100%, 1040px),
+    calc((100svh - 270px) * 2.3),
+    min(100%, 1720px)
+  );
+}
 .hero-media {
   position: relative;
   width: min(100%, 1040px);
+  width: var(--cover-width);
   aspect-ratio: 2.3;
   overflow: hidden;
   margin-top: 12px;
@@ -197,6 +207,7 @@ figcaption {
 }
 .hero-foot {
   width: min(100%, 1040px);
+  width: var(--cover-width);
   padding: 0 28px;
   display: flex;
   align-items: center;
@@ -643,6 +654,9 @@ footer {
   .hero {
     padding-bottom: 30px;
   }
+  .hero-media {
+    aspect-ratio: 1.6;
+  }
   .hero-inner {
     padding: 42px 26px 0;
   }
@@ -740,5 +754,162 @@ footer {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+}
+
+/* Narrative preview: result, research question, sensing principle, and evidence. */
+.eyebrow,
+.step-label {
+  font: 600 12px/1.5 var(--font);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 18px;
+}
+.eyebrow {
+  text-align: center;
+}
+.story-intro {
+  text-align: center;
+}
+.story-intro .section-heading {
+  margin-bottom: 20px;
+  text-wrap: balance;
+}
+.section-lede {
+  font-size: 19px;
+  line-height: 1.7;
+  color: #656565;
+  max-width: 780px;
+  margin: 0 auto 36px;
+}
+.section.demo-intro {
+  padding-top: 80px;
+}
+.section + .section > .read:first-child:before {
+  display: none;
+}
+.story-question {
+  background: #f1f5f3;
+  padding-top: 90px;
+  padding-bottom: 92px;
+}
+.story-question .read {
+  max-width: 1000px;
+  text-align: center;
+}
+.story-question h2 {
+  font: 400 clamp(32px, 3.2vw, 46px)/1.35 var(--serif);
+  letter-spacing: -0.035em;
+  color: #193f34;
+  max-width: 1000px;
+  margin: 0 auto 32px;
+  text-wrap: balance;
+}
+.question-context {
+  max-width: 740px;
+  margin: 0 auto 28px;
+  color: #53655e;
+}
+.research-question {
+  font-size: 21px;
+  max-width: 740px;
+  margin: 0 auto;
+  color: #1e4639;
+}
+.solution-step {
+  margin-top: 58px;
+}
+.solution-step h3 {
+  margin: 0 0 20px;
+  font-size: 30px;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+.principle-figure {
+  max-width: 920px;
+}
+.solution-comparison {
+  display: grid;
+  grid-template-columns: 0.9fr 1.25fr;
+  align-items: center;
+  gap: 44px;
+  padding-top: 46px;
+  border-top: 1px solid var(--rule);
+}
+.solution-comparison figure {
+  margin: 0;
+}
+.solution-comparison figcaption {
+  text-align: left;
+}
+.fabrication-details {
+  margin-top: 34px;
+}
+.fabrication-details .evidence > p {
+  max-width: var(--read);
+  font-size: 15px;
+  margin: 12px auto;
+}
+.story-system {
+  background: #fafafa;
+}
+.pipeline-heading {
+  padding-top: 46px;
+  margin-top: 64px;
+  border-top: 1px solid var(--rule);
+}
+.pipeline-heading h3 {
+  margin-top: 0;
+}
+.performance-subheading {
+  margin-top: 42px;
+  padding-top: 8px;
+}
+.performance-moving {
+  margin-top: 72px;
+  padding-top: 20px;
+  border-top: 1px solid var(--rule);
+}
+#paper {
+  border-top: 1px solid var(--rule);
+}
+#video {
+  padding-top: 26px;
+}
+#whiskers, #pipeline, #results, #moving {
+  scroll-margin-top: 90px;
+}
+@media (max-width: 800px) {
+  .section.demo-intro {
+    padding-top: 58px;
+  }
+  .section-lede {
+    font-size: 17px;
+  }
+  .story-question {
+    padding: 68px 24px;
+  }
+  .wide-break {
+    display: none;
+  }
+  .research-question {
+    font-size: 19px;
+  }
+  .solution-comparison {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .solution-step h3 {
+    font-size: 27px;
+  }
+  .solution-step {
+    margin-top: 42px;
+  }
+  .solution-comparison figcaption {
+    text-align: center;
+  }
+  .pipeline-heading {
+    margin-top: 42px;
   }
 }

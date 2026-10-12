@@ -33,9 +33,27 @@
       `${video.paused ? "Play" : "Pause"} ${label}`,
     );
   }
+  // The cover opens with 1.2 s of darkness. When it cannot play, show a lit
+  // frame instead of a black box.
+  const hero = document.getElementById("hero-video");
+  const stillTime = hero ? parseFloat(hero.dataset.stillTime) : NaN;
+  const darkOpening = 1.5;
+  function showStill() {
+    if (!hero || !Number.isFinite(stillTime)) return;
+    const seek = () => {
+      if (hero.paused && hero.currentTime < darkOpening)
+        hero.currentTime = stillTime;
+    };
+    if (hero.readyState >= 1) seek();
+    else hero.addEventListener("loadedmetadata", seek, { once: true });
+  }
   function play(video) {
     const promise = video.play();
-    if (promise) promise.catch(() => update(video));
+    if (promise)
+      promise.catch(() => {
+        update(video);
+        if (video === hero) showStill();
+      });
   }
   videos.forEach((video) => {
     video.addEventListener("play", () => update(video));
@@ -43,6 +61,7 @@
     if (preference.matches) video.pause();
     update(video);
   });
+  if (preference.matches) showStill();
   buttons.forEach((button) =>
     button.addEventListener("click", () => {
       const video = document.getElementById(button.dataset.video);
@@ -87,7 +106,10 @@
     }
   }
   preference.addEventListener("change", () => {
-    if (preference.matches) videos.forEach((video) => video.pause());
+    if (preference.matches) {
+      videos.forEach((video) => video.pause());
+      showStill();
+    }
     else
       inView.forEach((video) => {
         if (!manuallyPaused.has(video)) play(video);

@@ -6,7 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1, viewport-fit=cover"
     />
-    <meta name="color-scheme" content="light" />
+    <meta name="color-scheme" content="dark" />
     <title>
       Fluorescence-enhanced Whisker Array with Vision-based Deformation Analysis for Underwater Source Localization
     </title>
@@ -46,15 +46,10 @@
       href="https://fonts.googleapis.com/css2?family=Castoro:ital@0;1&family=Noto+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link
-      rel="preload"
-      as="image"
-      href="static/images/hero_poster.jpg"
-      fetchpriority="high"
-    />
-    <link rel="stylesheet" href="project.css" />
+    <link rel="stylesheet" href="project.css?v=cover-20261012-2" />
     <link rel="canonical" href="https://fluorescent-whisker.github.io/">
   <meta property="og:url" content="https://fluorescent-whisker.github.io/">
+<link rel="stylesheet" href="dark.css?v=cover-20261012-2" />
 </head>
   <body>
     <header class="hero">
@@ -66,12 +61,6 @@
         </h1>
       </div>
       <div class="hero-media">
-        <img
-          class="hero-poster"
-          src="static/images/hero_poster.jpg"
-          alt=""
-          fetchpriority="high"
-        />
         <video
           id="hero-video"
           autoplay
@@ -79,10 +68,10 @@
           loop
           playsinline
           preload="auto"
-          poster="static/images/hero_poster.jpg"
-          aria-hidden="true"
+          data-still-time="8.5"
+          aria-label="Five fluorescent whiskers in the dark. One ultraviolet light switches on, then a second; shown at 1× speed."
         >
-          <source src="static/videos/hero_loop.mp4" type="video/mp4" />
+          <source src="static/videos/hero-dark-start.mp4" type="video/mp4" />
         </video>
       </div>
       <div class="hero-foot">
@@ -134,37 +123,27 @@
       </div>
     </header>
 
-    <nav class="nav" aria-label="Sections">
-      <ul>
-        <li><a href="#idea">Overview</a></li>
-        <li><a href="#demo">Demo</a></li>
-        <li><a href="#whiskers">Sensing system</a></li>
-        <li><a href="#pipeline">Visual tracking</a></li>
-        <li><a href="#results">Results</a></li>
-        <li><a href="#moving">Moving source</a></li>
-        <li><a href="#paper">Paper &amp; authors</a></li>
-        <li><a href="#video">Full video</a></li>
-      </ul>
-    </nav>
+    <nav class="nav" aria-label="Sections"><ul>
+      <li><a href="#demo">Result</a></li>
+      <li><a href="#question">Question</a></li>
+      <li><a href="#solution">Solution</a></li>
+      <li><a href="#system">System</a></li>
+      <li><a href="#performance">Performance</a></li>
+      <li><a href="#paper">Paper</a></li>
+      <li><a href="#video">Full video</a></li>
+    </ul></nav>
 
     <main>
-      <section class="statement" id="idea">
-        <h2>
-          Locating an underwater source<br />
-          from <em>the flow it creates.</em>
-        </h2>
-        <p>
-          Five fluorescent whiskers glow under low-power UV light. A single
-          camera watches them bend, and a lightweight network turns two seconds
-          of deformation into a source position.
-        </p>
-      </section>
-
       <section
         class="section demo-intro"
         id="demo"
         aria-label="Moving-source demonstration"
       >
+        <div class="read story-intro">
+          <p class="eyebrow">Result</p>
+          <h2 class="section-heading">Localizing a moving source in the dark</h2>
+          <p class="section-lede">Five fluorescent whiskers and one camera estimate where an underwater thruster is, using the flow it creates.</p>
+        </div>
         <div class="wrap">
           <figure class="demo">
             <video
@@ -197,130 +176,75 @@
               </button>
             </div>
           </figure>
-          <details class="evidence">
-            <summary>
-              System overview figure
-              <span>Biological inspiration, platform, and localization</span>
-            </summary>
-            <figure class="narrow">
-              <a
-                class="zoom"
-                href="static/images/fig1_overview.jpg"
-                aria-label="Enlarge figure"
-              >
-                <picture>
-                  <source
-                    srcset="static/images/fig1_overview.webp"
-                    type="image/webp"
-                  />
-                  <img
-                    src="static/images/fig1_overview.jpg"
-                    width="2000"
-                    height="2501"
-                    alt="Overview: a seal-whisker-inspired fluorescent whisker array senses the flow from an underwater thruster; predicted positions track a moving source along arc and radial trajectories."
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </picture>
-              </a>
-              <figcaption>
-                Flow disturbances from an underwater source deform the whiskers;
-                the camera sees the deformation and the model recovers the
-                source position. Bottom: real-time localization of a thruster
-                moving along an arc and along a radial path.
-              </figcaption>
-            </figure>
-          </details>
+
+        </div>
+      </section>
+      <section class="section story-question" id="question">
+        <div class="read">
+          <p class="eyebrow">Question</p>
+          <h2>How can we observe marine life in the deep sea<br class="wide-break" /> <em>while minimizing our influence on it?</em></h2>
+          <p class="question-context"><span>In dark water, observation often requires us to add light or sound.</span><span>Those signals can change animal behavior and the observations we make.</span></p>
         </div>
       </section>
 
-      <section class="section" id="whiskers">
-        <div class="read">
-          <h2 class="section-heading">Reading flow in the dark</h2>
-          <p class="question">
-            How can a camera see a whisker with so little light?
-          </p>
+      <section class="section story-solution" id="solution">
+        <div class="read story-intro">
+          <p class="eyebrow">Solution</p>
+          <h2 class="section-heading">Flow sensing with local optical readout</h2>
+          <p class="section-lede">The source creates the flow. Fluorescence makes the sensor's response visible to a camera.</p>
         </div>
-        <div class="wrap">
-          <figure class="demo">
-            <video
-              id="fluorescence_loop"
-              class="demo-video"
-              muted
-              loop
-              playsinline
-              preload="none"
-              poster="static/images/fluorescence_loop.jpg"
-              aria-label="Fluorescent whiskers become visible as UV illumination is switched on."
-            >
-              <source
-                src="static/videos/fluorescence_loop.mp4"
-                type="video/mp4"
-              />
-            </video>
-            <figcaption>
-              As UV illumination turns on, the fluorescent whiskers become
-              visible in the dark. The inset shows the camera view. Playback:
-              1×.
-            </figcaption>
-            <div class="demo-tools">
-              <button
-                type="button"
-                class="motion-toggle"
-                data-video="fluorescence_loop"
-              >
-                Play demo
-              </button>
+        <article class="solution-step">
+          <div class="read">
+            <p class="step-label">01 / Flow sensing</p>
+            <h3>Locate the source through its hydrodynamic signal</h3>
+            <p>Harbor seals use their whiskers to follow hydrodynamic trails. Inspired by this ability, our array senses the flow-induced bending of five whiskers. A camera observes the array, and a model estimates the source position from their deformation.</p>
+          </div>
+          <div class="wrap principle-figure"><figure class="">
+      <a class="zoom" href="static/images/fig1-sensing-principle.jpg" aria-label="Enlarge figure">
+        <picture><source srcset="static/images/fig1-sensing-principle.webp" type="image/webp" />
+          <img src="static/images/fig1-sensing-principle.jpg" alt="Seal-whisker inspiration and flow from an underwater thruster, with the fluorescent whisker array, camera view, and tracked deformation." width="2126" height="1602" loading="lazy" decoding="async" />
+        </picture>
+      </a><figcaption>Flow from a source bends the whiskers. Their deformation carries information about where the source is.</figcaption>
+    </figure></div>
+        </article>
+        <article class="solution-step">
+          <div class="wrap solution-comparison">
+            <div>
+              <p class="step-label">02 / Local optical readout</p>
+              <h3>Make the whiskers visible with fluorescence</h3>
+              <p>Fluorescent pigment gives the whiskers strong contrast against the dark water. The camera reads their motion with illumination concentrated around the array.</p>
+              <p>The whiskers become visible under low-power UV excitation (approximately 100&nbsp;mW).</p>
             </div>
-          </figure>
+            <figure class="">
+      <a class="zoom" href="static/images/fig3-fluorescence-black.svg" aria-label="Enlarge figure">
+        <img src="static/images/fig3-fluorescence-black.svg" alt="Whiskers with and without fluorescent pigment, compared without UV and under UV light." width="1280" height="728" loading="lazy" decoding="async" />
+      </a><figcaption>With UV excitation, the fluorescent whisker is clearly visible. The non-fluorescent whisker remains faint.</figcaption>
+    </figure>
+          </div>
+          <div class="wrap fabrication-details">
+            <details class="evidence">
+              <summary>Whisker fabrication <span>Materials and the two-stage molding process</span></summary>
+              <p>Each whisker contains a 0.4&nbsp;mm superelastic nitinol core inside a urethane shell with 5&nbsp;wt% green fluorescent pigment. Two-stage molding forms the undulating, tapered profile.</p>
+              <figure class="">
+      <a class="zoom" href="static/images/fig3_fabrication.jpg" aria-label="Enlarge figure">
+        <picture><source srcset="static/images/fig3_fabrication.webp" type="image/webp" />
+          <img src="static/images/fig3_fabrication.jpg" alt="Two-stage molding and the resulting whiskers, with the fluorescent pigment comparison." width="2000" height="346" loading="lazy" decoding="async" />
+        </picture>
+      </a><figcaption>Two-stage molding adds the fluorescent urethane shell around the nitinol core.</figcaption>
+    </figure>
+            </details>
+          </div>
+        </article>
+      </section>
+
+      <section class="section story-system" id="system">
+        <div class="read story-intro">
+          <p class="eyebrow">System</p>
+          <h2 class="section-heading">Measuring deformation with a single camera</h2>
+          <p class="section-lede">The sensing platform combines the whisker array, local UV excitation, and a visual tracking pipeline.</p>
         </div>
         <div class="read">
-          <p class="lede">
-            Harbor seals follow hydrodynamic trails with their whiskers. Our
-            artificial whisker borrows the same undulating, tapered shape, which
-            suppresses the self-excited vortex oscillations a plain cylinder
-            would show in flow, so what bends it is the flow from the source.
-          </p>
-          <p>
-            Each whisker is a 0.4&nbsp;mm superelastic nitinol core inside a
-            urethane shell with 5&nbsp;wt% green fluorescent pigment, cast in a
-            two-stage molding process. Without UV, a fluorescent whisker looks
-            like any other. Under UV, it stands out sharply against the dark
-            water, which is what lets the illumination stay at roughly
-            100&nbsp;mW per light.
-          </p>
-        </div>
-        <div class="wrap">
-          <figure>
-            <a
-              class="zoom"
-              href="static/images/fig3_fabrication.jpg"
-              aria-label="Enlarge figure"
-            >
-              <picture>
-                <source
-                  srcset="static/images/fig3_fabrication.webp"
-                  type="image/webp"
-                />
-                <img
-                  src="static/images/fig3_fabrication.jpg"
-                  width="2000"
-                  height="346"
-                  alt="Two-stage molding process for the fluorescent whisker, and a comparison of whiskers with and without fluorescent pigment under UV light."
-                  loading="lazy"
-                  decoding="async"
-                />
-              </picture>
-            </a>
-            <figcaption>
-              Left: two-stage molding with fluorescence added to the urethane
-              overmold. Right: with and without pigment, with and without UV.
-              Only the fluorescent whisker under UV is clearly visible.
-            </figcaption>
-          </figure>
-        </div>
-        <div class="read">
-          <h3>One camera, five orientations</h3>
+          <h3 id="whiskers">One camera, five whisker orientations</h3>
           <p>
             The platform is a 1080p, 60&nbsp;Hz camera, two 365&nbsp;nm UV
             lights on either side of it, and five whiskers mounted at different
@@ -359,14 +283,10 @@
             </figcaption>
           </figure>
         </div>
-      </section>
 
-      <section class="section tint" id="pipeline">
-        <div class="read">
-          <h2 class="section-heading">
-            From whisker motion to source position
-          </h2>
-          <p class="question">What can five bending whiskers tell us?</p>
+        <div class="read pipeline-heading">
+          <p class="step-label">Computer vision pipeline</p>
+          <h3 id="pipeline">Whisker motion becomes a source position</h3>
         </div>
         <div class="wrap">
           <figure class="demo">
@@ -435,13 +355,12 @@
           </figure>
         </div>
       </section>
-
-      <section class="section" id="results">
+      <section class="section" id="performance">
         <div class="read">
-          <h2 class="section-heading">Where is the source?</h2>
-          <p class="question">
-            Testing beyond the positions seen during training.
-          </p>
+          <p class="eyebrow">Performance</p>
+          <h2 class="section-heading">Localization beyond the training positions</h2>
+          <h3 class="performance-subheading" id="results">Stationary sources</h3>
+          
           <p>
             A thruster on a three-axis gantry is moved over a fan-shaped region
             350–950&nbsp;mm from the array and ±30° around its axis, always
@@ -532,8 +451,7 @@
             </table>
           </div>
           <p>
-            Bearing is learned better than range: angular estimates stay tight
-            everywhere, while off-grid range estimates are pulled toward the
+            Bearing is learned better than range: angular estimates are generally more concentrated than range estimates, while off-grid range estimates are pulled toward the
             nearest training radius. The mapping still interpolates, with
             off-grid predictions clustering around their true locations.
           </p>
@@ -573,11 +491,9 @@
             </figure>
           </details>
         </div>
-      </section>
-
-      <section class="section tint" id="moving">
+        <div class="performance-moving">
         <div class="read">
-          <h2 class="section-heading">Following different trajectories</h2>
+          <h3 id="moving" class="performance-subheading">Moving sources</h3>
           <p class="question">Does the estimate follow different paths?</p>
         </div>
         <div class="wrap">
@@ -661,15 +577,8 @@
           </details>
         </div>
         <div class="read">
-          <h3>Limitations and next steps</h3>
-          <p>
-            Localization is planar: the thruster sits at the array's height,
-            faces it, and runs at a fixed power. A first look at source strength
-            shows that a stronger thruster gives a larger and steadier whisker
-            response. Next: flow visualization around the array, a higher frame
-            rate for frequency cues, more source types, and integration on an
-            underwater vehicle.
-          </p>
+          <h3>Experimental scope</h3>
+          <p>The localization experiments use a thruster in a pool, at the array's height, facing the array and operating at a fixed power. The results establish planar source localization under these conditions. Observing marine animals in the deep sea, and measuring how this sensing approach affects their behavior, remain future work.</p>
         </div>
         <div class="wrap">
           <details class="evidence">
@@ -705,9 +614,8 @@
             </figure>
           </details>
         </div>
-      </section>
-
-      <section class="section" id="paper">
+        </div>
+      </section>      <section class="section" id="paper">
         <div class="wrap">
           <h2 class="section-heading">Paper &amp; authors</h2>
           <p class="author-list">
@@ -779,64 +687,7 @@
             <a href="mailto:xxie15@stanford.edu">Xiaochi Xie</a>.
           </p>
         </div>
-      </section>
-
-      <section class="section tint" id="qa">
-        <div class="read qa">
-          <h2 class="section-heading">Questions &amp; answers</h2>
-          <details>
-            <summary>Why fluorescence instead of a brighter light?</summary>
-            <p>
-              The goal is to observe without disturbing. Fluorescent pigment
-              makes the whisker the brightest thing in the frame under a
-              low-power UV source, so the camera gets clean contrast at about
-              100&nbsp;mW per light. A conventional light bright enough to track
-              a plain whisker would flood the surroundings.
-            </p>
-          </details>
-          <details>
-            <summary>
-              Why one camera instead of a sensor on every whisker?
-            </summary>
-            <p>
-              Per-whisker sensors need wiring, calibration and synchronization,
-              and the system grows with every whisker added. A shared camera
-              reads all five at once, and the whiskers point in different
-              directions on purpose, so the single view captures deformation
-              that any one whisker would hide.
-            </p>
-          </details>
-          <details>
-            <summary>Why is bearing easier to estimate than range?</summary>
-            <p>
-              Changing the source angle changes which whiskers bend and how,
-              which the model picks up easily. Changing range mostly scales the
-              same pattern, a weaker cue, so off-grid ranges drift toward the
-              nearest training radius.
-            </p>
-          </details>
-          <details>
-            <summary>Does it work while the source is moving?</summary>
-            <p>
-              Yes, within limits. The model sees only stationary sources during
-              training, yet it follows radial and arc trajectories in real time
-              using 2&nbsp;s windows. Faster motion increases the error, so
-              continuous tracking will benefit from training data collected
-              along trajectories.
-            </p>
-          </details>
-          <details>
-            <summary>What are the main limitations?</summary>
-            <p>
-              The experiments are planar, with a single source type at fixed
-              power, facing the array. Height, heading and strength are not yet
-              estimated, and the pool boundary introduces a mild left–right
-              asymmetry in error.
-            </p>
-          </details>
-        </div>
-      </section>
-      <section class="section tint" id="video">
+      </section>      <section class="section tint" id="video">
         <div class="wrap">
           <h2 class="section-heading">Full technical video</h2>
           <p class="question">
@@ -889,8 +740,7 @@
     </main>
 
     <footer>
-      Last updated October 2026 · Figures from the submitted manuscript (under
-      review).<br />
+      Last updated October 2026 · Figures from arXiv:2610.07275. Manuscript under review.<br />
       Page design inspired by
       <a href="https://bdml.stanford.edu/pages/FBG_Whisker_share/"
         >FBG Whisker</a
@@ -994,6 +844,6 @@
 
       })();
     </script>
-    <script src="project.js"></script>
+    <script src="project.js?v=cover-20261012-2"></script>
   </body>
 </html>

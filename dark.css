@@ -1,0 +1,137 @@
+/* Dark presentation. Scientific figures retain their original colors. */
+:root {
+  color-scheme: dark;
+  --paper: #020507;
+  --paper-2: #0a1117;
+  --ink: #e4eaed;
+  --muted: #98a8b2;
+  --rule: #ffffff24;
+  --accent: #75d9d3;
+  --max: 1160px;
+  --read: 880px;
+}
+html, body { background: var(--paper); }
+body { color: var(--ink); }
+a { text-decoration-color: #6c919a; }
+a:hover { color: #98f4e8; }
+h2, h3 { color: #f1f5f5; }
+h2 { letter-spacing: -.035em; }
+/* The cover keeps the published hero styles from project.css. */
+.nav {
+  background: #03080de8;
+  border-color: #ffffff18;
+  backdrop-filter: blur(18px);
+}
+.nav ul { gap: 34px; }
+.nav a { color: #9caeb7; font-size: 13px; }
+.nav a:hover, .nav a.active { color: #b8f5e9; }
+.nav a.active { border-bottom-color: #a4ebdb; }
+.section, .section.tint, .story-system { background: #020507; }
+.section { padding-top: 105px; padding-bottom: 105px; }
+.eyebrow, .step-label { color: #82d6d1; }
+.eyebrow { letter-spacing: .18em; }
+.section-heading { font-size: clamp(30px, 3vw, 42px); }
+.section-lede, .question { color: #a7b7c0; }
+.section.demo-intro { padding-top: 76px; }
+.demo-intro .demo { margin-top: 42px; }
+.demo video { background: #000; }
+.demo-tools .motion-toggle { color: #bbc8ce; border-color: #4a5b64; }
+.demo-tools .motion-toggle:hover { color: #eafff9; border-color: #b8ece0; }
+.story-question {
+  position: relative;
+  isolation: isolate;
+  min-height: 90svh;
+  display: grid;
+  align-items: center;
+  padding: 130px 40px;
+  background: #01070d url('static/images/deep-sea-background.png') center / cover no-repeat;
+}
+.story-question::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(180deg, #020507 0%, #02050718 17%, #02050712 73%, #020507 100%);
+}
+.story-question .read {
+  max-width: 1180px;
+  padding: 32px 0;
+  text-shadow: 0 2px 30px #000;
+}
+.story-question .eyebrow { margin-bottom: 32px; color: #8fe4dc; }
+.story-question h2 {
+  max-width: 1180px;
+  font-size: clamp(34px, 3.8vw, 60px);
+  line-height: 1.25;
+  color: #f0f3ed;
+  margin-bottom: 40px;
+}
+.story-question h2 em {
+  font-style: normal;
+  color: #f2d49e;
+}
+.question-context { color: #bacbd4; max-width: 1080px; font-size: 18px; }
+.question-context span { display: block; }
+.story-solution { padding-top: 100px; }
+.solution-step { margin-top: 68px; }
+.solution-step .read { padding-left: 24px; border-left: 2px solid #458a88; }
+.solution-step h3 { font-size: 31px; }
+.principle-figure { max-width: 1020px; }
+.principle-figure figure { margin-top: 44px; }
+.solution-comparison { padding-top: 65px; gap: 60px; }
+figcaption { color: #99aab3; }
+.evidence, .abstract { border-color: var(--rule); }
+.evidence summary, .abstract summary { color: #dce9ed; }
+.evidence summary:hover, .abstract summary:hover { color: #95e9df; }
+.evidence > summary span, .evidence summary:after, .abstract summary:after { color: #8a9fa9; }
+.evidence { background: #070d11; padding: 0 20px; }
+.evidence figure { margin-bottom: 26px; }
+.evidence > p { color: #bbc9d0; }
+.story-system { border-top: 1px solid var(--rule); }
+.pipeline-heading { margin-top: 76px; padding-top: 56px; }
+#performance { border-top: 1px solid var(--rule); }
+.stats {
+  border-top: 1px solid #79cfc455;
+  border-bottom: 1px solid #79cfc455;
+  padding: 34px 0;
+}
+.stat b { color: #9cede0; font-size: 42px; }
+.stat span { color: #a7bcc4; font-size: 13px; }
+.result-note, .author-notes, .release-note { color: #9caeb8; }
+th { color: #a9c5cf; }
+td { color: #cbd6db; }
+tr.total td { color: #abecdf; background: #10241f; }
+.performance-moving { border-color: #ffffff24; }
+#paper { background: #020507; }
+.author-list a { color: #d2eae8; }
+.citation-tools button { background: #0f2427; border-color: #46656a; color: #cfebe7; }
+.citation-tools button:hover { border-color: #b2f5e7; color: #fff; }
+.citation pre { background: #091014; color: #bcd2d9; }
+.citation-status { color: #a8bec8; }
+.abstract { padding: 0 20px; background: #070d11; }
+.abstract p { color: #b9c8cf; }
+#video { padding-top: 35px; }
+.chip { color: #bdd2da; border-color: #45636c; }
+.chip span { color: #80c7c5; }
+.chip:hover { color: #f5ffff; border-color: #b3eedb; }
+footer { color: #8196a2; background: #000; }
+.lightbox { background: #000e; }
+@media (max-width: 800px) {
+  .nav ul { gap: 26px; }
+  .section { padding: 74px 24px; }
+  .section.demo-intro { padding-top: 66px; }
+  .section-heading { font-size: 31px; }
+  .story-question { min-height: 90svh; padding: 95px 28px; background-position: 40% center; }
+  .story-question h2 { font-size: clamp(34px, 5vw, 44px); }
+  .story-question .read { padding: 0; }
+  .question-context { font-size: 17px; }
+  .solution-step .read { padding-left: 18px; }
+  .solution-step h3 { font-size: 27px; }
+  .solution-comparison { gap: 25px; padding-top: 42px; }
+  .stat b { font-size: 31px; }
+  .stat span { font-size: 11px; }
+  .evidence { padding: 0 12px; }
+}
+@media (max-width: 440px) {
+  .stat b { font-size: 28px; }
+}
